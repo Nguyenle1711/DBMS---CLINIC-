@@ -12,4 +12,6 @@ public interface UserRepository extends JpaRepository<Userinfo,Long> {
     );
     @Query(value = "EXEC view_user;",nativeQuery = true)
     List<Object[]> view();
+    @Query(value = "EXEC VIEW_DETAIL_USER @phone=:phone",nativeQuery = true)
+    List<Object[]> viewDetail(String phone);
 }
