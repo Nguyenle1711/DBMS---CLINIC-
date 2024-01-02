@@ -57,7 +57,40 @@ public class AppointmentController {
                                                   @RequestParam("time") Time time){
         int result= appointmentRepository.insertAppointment(patient_id,dentist_id,date,time);
         return ResponseEntity.ok(result);
-
+    }
+    @GetMapping("/listDetail")
+    public ResponseEntity<String> listAppointment(@RequestParam("appointmentid")int appointmentid){
+        List<Object[]> result=appointmentRepository.viewappointment(appointmentid);
+        List<Map<String,Object>> jsonDataList=new ArrayList<>();
+        for (Object[] row : result) {
+            Map<String, Object> rowData = new LinkedHashMap<>();
+            rowData.put("appointment_id", row[0]);
+            rowData.put("patient_id", row[1]);
+            rowData.put("date",row[2]);
+            rowData.put("time",row[3]);
+            rowData.put("dentistid",row[4]);
+            jsonDataList.add(rowData);
+        }
+        Gson gson = new Gson();
+        String jsonData = gson.toJson(jsonDataList);
+        return ResponseEntity.ok(jsonData);
+    }
+    @GetMapping("/listAppointmentDentist")
+    public ResponseEntity<String> listAppointmentDentis(@RequestParam("appointmentid")int appointmentid){
+        List<Object[]> result=appointmentRepository.viewappointment(appointmentid);
+        List<Map<String,Object>> jsonDataList=new ArrayList<>();
+        for (Object[] row : result) {
+            Map<String, Object> rowData = new LinkedHashMap<>();
+            rowData.put("appointment_id", row[0]);
+            rowData.put("patient_id", row[1]);
+            rowData.put("date",row[2]);
+            rowData.put("time",row[3]);
+            rowData.put("dentistid",row[4]);
+            jsonDataList.add(rowData);
+        }
+        Gson gson = new Gson();
+        String jsonData = gson.toJson(jsonDataList);
+        return ResponseEntity.ok(jsonData);
     }
 
 }

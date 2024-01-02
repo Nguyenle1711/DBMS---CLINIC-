@@ -9,6 +9,6 @@ import java.sql.Time;
 import java.util.List;
 
 public interface DentistSCheduleRepository extends JpaRepository<DentistSchedule,Long> {
-    @Query(value = "EXEC DENTIST_FREE @date:=date, @time=:time",nativeQuery = true)
+    @Query(value = "EXEC DENTIST_FREE @date=:date, @time=:time",nativeQuery = true)
     List<Object[]> dentistfree(Date date, Time time);
 }
