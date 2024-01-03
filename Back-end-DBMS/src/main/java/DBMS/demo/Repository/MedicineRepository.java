@@ -14,4 +14,12 @@ public interface MedicineRepository  extends JpaRepository<Medicine, Integer> {
     List<Object[]> viewMedicineList();
     @Query(value="EXEC VIEW_MEDICINE_DETAIL @medicineID=:medicineID ",nativeQuery = true)
     List<Object[]> viewMedicine(int medicineID);
+
+    @Query(value="EXEC EDIT_MEDICINE @medicineID=:medicineID ,@name=:name , " +
+            "@unit=:unit , @contraindication=:contraindication , " +
+            "@quantity=:quantity , @expiration=:expiration , @cost=:cost ",nativeQuery = true)
+    Integer editMedicine(int medicineID, String name, String unit, String contraindication, int quantity, Date expiration,int cost);
+
+    @Query(value ="EXEC DELETE_MEDICINE @medicine_id=:medicineid",nativeQuery = true )
+    String deleteMedicinee(int medicineid);
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -60,6 +61,24 @@ public class MedicineController {
         Gson gson = new Gson();
         String jsonData = gson.toJson(jsonDataList);
         return ResponseEntity.ok(jsonData);
+    }
+    @PostMapping("/editMedicine")
+    private ResponseEntity<Integer> editMedicine(@RequestParam(name = "medicineID")Integer medicineID,
+                                               @RequestParam(name = "name")String name,
+                                               @RequestParam(name = "unit")String unit,
+                                                 @RequestParam(name = "contraindication")String contraindication,
+                                                 @RequestParam(name = "quantity")Integer quantity,
+                                                 @RequestParam(name = "expiration")Date expiration,
+                                                 @RequestParam(name = "cost")int cost){
+        int result= medicineRepository.editMedicine(medicineID,name,unit,contraindication,quantity,expiration,cost);
+        return ResponseEntity.ok(result );
+    }
+    @PostMapping("/delete")
+    private ResponseEntity<String> deleteMedicine(@RequestParam("medicineid")int medicineid){
+        String result = medicineRepository.deleteMedicinee(medicineid);
+        return ResponseEntity.ok("success");
+
+
     }
 
 }
