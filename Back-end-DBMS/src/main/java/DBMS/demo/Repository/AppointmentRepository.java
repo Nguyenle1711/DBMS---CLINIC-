@@ -14,4 +14,8 @@ public interface AppointmentRepository extends JpaRepository<Appointment,Long> {
     int insertAppointment(int patient_id, int dentist_id, Date date, Time time);
     @Query(value="EXEC VIEW_APPOINTMENT_DETAIL @appointmentid=:appointmentid ",nativeQuery = true)
     List<Object[]> viewappointment(int appointmentid);
+    @Query(value="EXEC VIEW_APPOINTMENT_DENTIST @dentistId=:dentistId ",nativeQuery = true)
+    List<Object[]> viewAppointmentDentist(int dentistId);
+
+
 }

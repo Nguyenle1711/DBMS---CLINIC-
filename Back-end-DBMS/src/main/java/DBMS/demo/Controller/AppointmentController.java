@@ -76,8 +76,8 @@ public class AppointmentController {
         return ResponseEntity.ok(jsonData);
     }
     @GetMapping("/listAppointmentDentist")
-    public ResponseEntity<String> listAppointmentDentis(@RequestParam("appointmentid")int appointmentid){
-        List<Object[]> result=appointmentRepository.viewappointment(appointmentid);
+    public ResponseEntity<String> listAppointmentDentis(@RequestParam("dentistId")int dentistId){
+        List<Object[]> result=appointmentRepository.viewAppointmentDentist(dentistId);
         List<Map<String,Object>> jsonDataList=new ArrayList<>();
         for (Object[] row : result) {
             Map<String, Object> rowData = new LinkedHashMap<>();
